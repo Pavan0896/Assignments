@@ -1,0 +1,64 @@
+h1{
+    text-align: center;
+    text-decoration: underline;
+    color: rgb(13, 111, 202);
+    text-transform: uppercase;
+    font-family: Patua One;
+    font-weight: bolder;
+}
+
+h1 ~ div {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 2%;
+}
+
+#table{
+    width: 60%;
+}
+
+table{
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+select{
+    width: 102%;
+}
+
+thead{
+    background-color: rgb(13, 111, 202);
+    color: white;
+    height: 30px;
+    font-family: Roboto;
+    font-size: 14px;
+}
+
+
+#formDiv{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 25%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-sizing: border-box;
+    height: fit-content;
+}
+
+#submit{
+    width: 102%;
+    height: 30px;
+    border-radius:20px;
+    color: white;
+    background-color: rgb(13, 111, 202);
+    border: 0cap;
+}
+
+#filterDiv{
+    width: 30%;
+    margin: auto;
+}
