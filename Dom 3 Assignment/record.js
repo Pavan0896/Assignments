@@ -33,12 +33,7 @@ form1.addEventListener("submit",function(){
         email : email1,
         mobile : mobile1 
     }
-    name1="";
-    employeeID1="";
-    department1="";
-    experience1="";
-    email1="";
-    mobile1="";
+    
     arr.push(obj)
     
     displayData(arr)
