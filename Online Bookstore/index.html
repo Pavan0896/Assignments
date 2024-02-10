@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Bookstore</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        text-align: center;
+      }
+      thead {
+        background-color: rgb(97, 97, 195);
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Online Bookstore</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Book Name</th>
+          <th>Author</th>
+          <th>Birthyear of Author</th>
+          <th>Nationality</th>
+          <th>Genre</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+</html>
+
+<script>
+  let bookArray = [];
+  function Author(name, birthYear, nationality) {
+    this.name = name;
+    this.birthYear = birthYear;
+    this.nationality = nationality;
+  }
+
+  function Book(title, author, genre, price) {
+    this.title = title;
+    this.author = new Author(name, birthYear, nationality);
+    this.genre = genre;
+    this.price = price;
+    this.getBookInfo = function () {
+      console.log(this);
+    };
+    bookArray.push(this);
+  }
+
+  let b1 = new Book("Harry Potter", Author("A", 1997, "Indian"), "Fantasy", 20);
+
+  let b2 = new Book("Twilight", Author("B", 1995, "American"), "Thriller", 30);
+
+  let b3 = new Book("Secret Seven", Author("C", 1992, "British"), "Kids", 40);
+
+  let b4 = new Book(
+    "Hardy Boys",
+    Author("D", 1990, "Australian"),
+    "Crime thriller",
+    50
+  );
+
+  bookArray.forEach(function (e, i) {
+    let tBody = document.querySelector("tbody");
+    let tRow = document.createElement("tr");
+    let bName = document.createElement("td");
+    bName.innerText = e.title;
+
+    let bAuthor = document.createElement("td");
+    bAuthor.innerText = e.author.name;
+
+    let bYear = document.createElement("td");
+    bYear.innerText = e.author.birthYear;
+
+    let bNationality = document.createElement("td");
+    bNationality.innerText = e.author.nationality;
+
+    let bGenre = document.createElement("td");
+    bGenre.innerText = e.genre;
+
+    let bPrice = document.createElement("td");
+    bPrice.innerText = e.price;
+
+    tRow.append(bName, bAuthor, bYear, bNationality, bGenre, bPrice);
+    tBody.append(tRow);
+  });
+</script>
