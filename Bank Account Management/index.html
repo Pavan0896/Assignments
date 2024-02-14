@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank Account Management</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  let bankArr = [];
+  function BankAccount(accountNumber, name, type, balance, active) {
+    this.accountNumber = accountNumber;
+    this.name = name;
+    this.type = type;
+    this.balance = balance;
+    this.active = active;
+    this.deposit = function (amount) {
+      this.balance += amount;
+    };
+
+    this.withdrawal = function (amount) {
+      if (amount > this.balance) {
+        alert(`Insufficient balance in ${this.name} account`);
+      } else {
+        this.balance -= amount;
+      }
+    };
+
+    this.checkBalance = function () {
+      console.log(this.balance);
+    };
+
+    this.isActive = function () {
+      if (this.balance > 0) {
+        this.active = true;
+        console.log(`${this.name} account is active`);
+      } else {
+        this.active = false;
+        console.log(`${this.name} account is not active`);
+      }
+    };
+
+    bankArr.push(this);
+  }
+
+  let a1 = new BankAccount(123, "A", "Current", 0, true);
+  a1.deposit(1000);
+  a1.withdrawal(500);
+  // a1.withdrawal(600);
+  a1.withdrawal(50);
+  a1.isActive();
+  console.log(a1);
+
+  let a2 = new BankAccount(234, "B", "Savings", 0, true);
+  a2.deposit(800);
+  a2.withdrawal(400);
+  a2.withdrawal(200);
+  a2.withdrawal(50);
+  a2.isActive();
+  console.log(a2);
+
+  let a3 = new BankAccount(345, "C", "Savings", 0, false);
+  a3.deposit(2000);
+  a3.withdrawal(400);
+  a3.withdrawal(200);
+  a3.withdrawal(50);
+  a3.withdrawal(1350);
+  a3.isActive();
+  console.log(a3);
+
+  function getTotalBalance() {
+    let totalBalance = 0;
+    bankArr.forEach(function (e, i) {
+      if (e.active == true) {
+        totalBalance += e.balance;
+      }
+    });
+    console.log(totalBalance);
+  }
+
+  getTotalBalance();
+</script>
