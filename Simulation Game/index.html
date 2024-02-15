@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulation Game</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  let vehicleMethods = {
+    accelerate: function (value) {
+      this.speed += value;
+    },
+
+    brake: function (value) {
+      this.speed -= value;
+    },
+
+    refuel: function () {
+      console.log("Vehicle is refueling.");
+    },
+  };
+
+  function Vehicle(brand, model, speed, fuelType) {
+    this.brand = brand;
+    this.model = model;
+    this.speed = speed;
+    this.fuelType = fuelType;
+    Object.setPrototypeOf(this, vehicleMethods);
+  }
+
+  function Car(brand, model, speed, fuelType, noOfWheels) {
+    Vehicle.call(this, brand, model, speed, fuelType);
+    this.noOfWheels = noOfWheels;
+    this.honking = function () {
+      console.log("Honk Honk!!!");
+    };
+  }
+
+  function Airplane(brand, model, speed, fuelType, numberOfEngines, hasLandingGear) {
+    Vehicle.call(this, brand, model, speed, fuelType);
+    this.numberOfEngines = numberOfEngines;
+    this.hasLandingGear = hasLandingGear;
+    this.takeOff = function () {
+      console.log("The airplane is taking off.");
+    };
+  }
+
+  let a = new Car("Tata", "Tiago", 160, "Petrol", 4);
+  console.log(a);
+  a.accelerate(60);
+  a.brake(20);
+  a.refuel();
+  a.honking();
+
+  let b = new Airplane("Boeing", "737", 500, "Jet Fuel", 4, true);
+  console.log(b);
+  b.accelerate(100);
+  b.brake(50);
+  b.refuel();
+  b.takeOff();
+
+  let c = new Car("Hyundai", "Creta", 300, "Petrol", 4);
+  console.log(c);
+  c.accelerate(20);
+  c.brake(100);
+  c.refuel();
+  c.honking();
+
+  let d = new Airplane("Airbus", "A320", 400, "Jet Fuel", 4, true);
+  console.log(b);
+  b.accelerate(80);
+  b.brake(50);
+  b.refuel();
+  b.takeOff();
+</script>
