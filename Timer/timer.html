@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      #time {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .digit {
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      .txt {
+        margin: 0 5px;
+      }
+
+      #submit {
+        padding: 5px 10px;
+        margin: 0 px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+      }
+
+      .btn button {
+        padding: 10px 20px;
+        margin: 0 5px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+      }
+
+      .btn button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JS Timer</h1>
+    <div id="time">
+      <label for="hour">Hour</label>
+      <input type="number" id="hours" />
+      <label for="minute">Minute</label>
+      <input type="number" id="mins" required />
+      <label for="second">Second</label>
+      <input type="number" id="secs" required />
+      <input type="submit" value="Set Timer" id="submit" /><br /><br />
+
+      <span class="digit" id="displayHours"> 00</span>
+      <span class="txt">Hr</span>
+      <span class="digit" id="displayMinutes"> 00</span>
+      <span class="txt">Min</span>
+      <span class="digit" id="displaySeconds"> 00</span>
+      <span class="txt">Sec</span>
+    </div>
+    <div class="btn">
+      <button id="start">Start</button>
+      <button id="pause">Pause</button>
+      <button id="reset">Reset</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  var seconds = document.getElementById("secs");
+  var minutes = document.getElementById("mins");
+  var hours = document.getElementById("hours");
+  let totalSeconds = 0;
+  let displayHours = document.getElementById("displayHours");
+  let displayMinutes = document.getElementById("displayMinutes");
+  let displaySeconds = document.getElementById("displaySeconds");
+
+  var id;
+  document.getElementById("submit").addEventListener("click", function () {
+    if (seconds.value == "") {
+      var total = parseInt(minutes.value * 60) + parseInt(hours.value * 3600);
+    } else if (minutes.value == "" && seconds.value == "") {
+      var total = parseInt(hours.value * 3600);
+    } else {
+      var total =
+        parseInt(seconds.value) +
+        parseInt(minutes.value * 60) +
+        parseInt(hours.value * 3600);
+    }
+
+    totalSeconds = total;
+    console.log(total);
+    displayHours.innerText = hours.value.toString().padStart(2, "0") || "00";
+    displayMinutes.innerText = minutes.value.toString().padStart(2, "0") || "00";
+    displaySeconds.innerText = seconds.value.toString().padStart(2, "0");
+  });
+
+  let startBtn = document.getElementById("start");
+  let pauseBtn = document.getElementById("pause");
+  let resetBtn = document.getElementById("reset");
+
+  startBtn.addEventListener("click", function () {
+    let hour = parseInt(hours.value) || 0;
+    let minute = parseInt(minutes.value) || 0;
+    let second = parseInt(seconds.value) || 0;
+
+    timerStart(hour, minute, second);
+  });
+  pauseBtn.addEventListener("click", timerStop);
+  resetBtn.addEventListener("click", resetTime);
+
+  function timerStart(hour, minute, second) {
+    id = setInterval(function () {
+      if (totalSeconds <= 0) {
+        clearInterval(id);
+        alert("Time's up!!!");
+      }
+
+      let hoursDisplay = Math.floor(totalSeconds / 3600);
+      let minutesDisplay = Math.floor((totalSeconds % 3600) / 60);
+      let secondsDisplay = totalSeconds % 60;
+
+      displayHours.textContent = hoursDisplay.toString().padStart(2, "0");
+      displayMinutes.textContent = minutesDisplay.toString().padStart(2, "0");
+      displaySeconds.textContent = secondsDisplay.toString().padStart(2, "0");
+
+      totalSeconds--;
+    }, 1000);
+  }
+
+  function timerStop() {
+    clearInterval(id);
+  }
+
+  function resetTime() {
+    clearInterval(id);
+    displayHours.textContent = "00";
+    displayMinutes.textContent = "00";
+    displaySeconds.textContent = "00";
+    seconds.value = "";
+    minutes.value = "";
+    hours.value = "";
+  }
+</script>
