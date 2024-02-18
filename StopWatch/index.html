@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      #time {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .digit {
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      .txt {
+        margin: 0 5px;
+      }
+
+      #btn button {
+        padding: 10px 20px;
+        margin: 0 5px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+      }
+
+      #btn button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JS Stopwatch</h1>
+    <div id="time">
+      <span class="digit" id="hour"> 00</span>
+      <span class="txt">Hr</span>
+      <span class="digit" id="min"> 00</span>
+      <span class="txt">Min</span>
+      <span class="digit" id="sec"> 00</span>
+      <span class="txt">Sec</span>
+    </div>
+    <div id="btn">
+      <button id="start">Start</button>
+      <button id="pause">Pause</button>
+      <button id="reset">Reset</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  let startBtn = document.getElementById("start");
+  let pauseBtn = document.getElementById("pause");
+  let resetBtn = document.getElementById("reset");
+
+  let hour = 0;
+  let minute = 0;
+  let count = 0;
+  var id;
+
+  startBtn.addEventListener("click", function () {
+    id = setInterval(function () {
+      count++;
+      document.getElementById("sec").innerText = count;
+      if (count == 60) {
+        count = 0;
+        minute++;
+        document.getElementById("sec").innerText = count;
+        document.getElementById("min").innerText = minute;
+      }
+
+      if (minute == 60) {
+        count = 0;
+        minute = 0;
+        hour++;
+        document.getElementById("sec").innerText = count;
+        document.getElementById("min").innerText = minute;
+        document.getElementById("hour").innerText = hour;
+      }
+    }, 1000);
+  });
+
+  pauseBtn.addEventListener("click", function () {
+    clearInterval(id);
+  });
+
+  resetBtn.addEventListener("click", function () {
+    count = 0;
+    minute = 0;
+    hour = 0;
+    document.getElementById("sec").innerText = "00";
+    document.getElementById("min").innerText = "00";
+    document.getElementById("sec").innerText = "00";
+  });
+</script>
