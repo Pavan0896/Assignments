@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+#container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#users {
+  list-style: none;
+  padding: 0;
+}
+.user {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+.user:last-child {
+  border-bottom: none;
+}
+img {
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 80px;
+  height: 80px;
+}
+
+button {
+  background-color: rgb(43, 199, 43);
+  border: none;
+  padding: 2%;
+  border-radius: 10px;
+  color: white;
+}
