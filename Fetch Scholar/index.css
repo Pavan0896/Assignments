@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Poppins;
+}
+
+h1 {
+  text-align: center;
+}
+
+#container {
+  display: flex;
+  height: auto;
+}
+
+#sortDiv {
+  margin: 0% 1%;
+  padding-top: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: 1%;
+}
+
+#sortDiv select{
+  font-family: Poppins;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 1%;
+  grid-column-gap: 3%;
+  padding: 3%;
+  height: auto;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 5%;
+  border-radius: 20px;
+  background-color: white;
+}
+
+#imgDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+#detailsDiv {
+  width: 80%;
+  margin-left: 3%;
+  margin-bottom: 0%;
+}
+
+#detailsDiv h3 {
+  font-size: large;
+}
+
+#detailsDiv h5 {
+  font-size: medium;
+}
+
+img {
+  height: auto;
+  width: 100%;
+}
