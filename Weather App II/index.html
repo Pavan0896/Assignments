@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="searchBar">
+        <input type="text" id="city" placeholder="Enter City Name">
+        <button>Search</button>
+
+    </div>
+
+    <div id="container">
+        <div id="info"></div>
+        <div id="maps">
+            <div class="gmap_canvas">
+                <iframe width="600" height="550" id="gmap_canvas" src="" frameborder="0" scrolling="no"
+                    marginheight="0" marginwidth="0" style="border-radius: 20px;"></iframe>
+            </div>
+        </div>
+        </div>
+        <div id="forecast_container">
+            <div class="icons">
+                <p class="weather" id="day1"></p>
+                <div class="image"><img
+                        src="https://cdn-icons-png.flaticon.com/128/616/616513.png"
+                        width="120px" class="imgClass" id="img1"></div>
+                
+                <p class="maxValues" id="day1Max"></p>
+                <p class="minValues" id="day1Min"></p>
+            </div>
+            <div class="icons">
+                <p class="weather" id="day2"></p>
+                <div class="image"><img
+                        src="https://cdn-icons-png.flaticon.com/256/9203/9203275.png"
+                        width="120px" class="imgClass" id="img2"></div>
+                
+                <p class="maxValues" id="day2Max"></p>
+                <p class="minValues" id="day2Min"></p>
+            </div>
+            <div class="icons">
+                <p class="weather" id="day3"></p>
+                <div class="image"><img
+                        src="https://cdn-icons-png.flaticon.com/512/1146/1146856.png"
+                        width="120px" class="imgClass" id="img3"></div>
+                
+                <p class="maxValues" id="day3Max"></p>
+                <p class="minValues" id="day3Min"></p>
+            </div>
+            <div class="icons">
+                <p class="weather" id="day4"></p>
+                <div class="image"><img
+                        src="https://cdn-icons-png.flaticon.com/128/9579/9579443.png"
+                        width="120px" class="imgClass" id="img4"></div>
+                
+                <p class="maxValues" id="day4Max"></p>
+                <p class="minValues" id="day4Min"></p>
+            </div>
+            <div class="icons">
+                <p class="weather" id="day5"></p>
+                <div class="image"><img
+                        src="https://static-00.iconduck.com/assets.00/white-sun-behind-cloud-with-rain-emoji-256x256-4ac5lkm8.png"
+                        width="120px" class="imgClass" id="img5"></div>
+                
+                <p class="maxValues" id="day5Max"></p>
+                <p class="minValues" id="day5Min"></p>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
+<script src="./index.js"></script>
