@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your task starts here
+    let p = React.createElement("p", {}, "Seize the day"); // In React's declarative method p tag, className and innerText can be added in 1 line of code
+    ReactDOM.render(p, document.getElementById("root"));
+
+    // React is a declarative JS library used to build UI components. It is created by Facebook. 
+    //React DOM acts as a bridge between React and DOM. It allows us to manipulate the DOM and render React components in our webpage.
+    //Babel is used to convert JSX code to JS code.
+
+    // Using all the above 3, the code will become smaller and easy to understand when compared to imperative method where many lines of code needs to be written.
+  </script>
+</html>
