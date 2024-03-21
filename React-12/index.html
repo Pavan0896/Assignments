@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSX and Babel</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Your JSX code here
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+
+      let text = "Seize the day (from text)";   // Interpolation where JS can be used in JSX using {variable_name}
+
+      let a = true;                             // Interpolation as a boolean, if it is true, trueText will be rendered and vice versa. 
+      let trueText = <p>true</p>;
+      let falseText = <p>false</p>;
+
+      let box = (
+        <div>
+          <p>Seize the day</p>
+          <p>{text}</p>
+          <p>{a ? trueText : falseText}</p> 
+        </div>
+      );
+      root.render(box);                         // To show all the three ways of rendering. 1. Simple JSX rendering
+                                                //                                          2. Dymnamic rendering
+                                                //                                          3. Conditional rendering
+    </script>
+  </body>
+</html>
