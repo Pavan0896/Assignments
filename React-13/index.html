@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSX and Babel</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Your JSX code here
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+
+      //ReactFragmentExample is a component. First letter should always be capital
+      const ReactFragmentExample = () => (
+        <React.Fragment>
+          <p
+            style={{
+              fontSize: "40px",
+              textAlign: "center",
+            }}
+          >
+            React is a javascript library
+          </p>
+          <div
+            className="main"
+            style={{
+              width: "20%",
+              margin: "auto",
+              padding: "20px",
+              textAlign: "center",
+              boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
+            }}
+          >
+            <p>Click the below button to alert 'Hello'</p>
+            <button
+              onClick={() => alert("Hello")}
+              style={{
+                border: "none",
+                backgroundColor: "rgb(85, 85, 244)",
+                color: "white",
+                padding: "8px",
+                borderRadius: "5px",
+              }}
+            >
+              Alert Hello
+            </button>
+          </div>
+        </React.Fragment>
+      );
+      root.render(<ReactFragmentExample />); // calling a component with this syntax(<Component/>) similar to calling a function(function());
+    </script>
+  </body>
+</html>
