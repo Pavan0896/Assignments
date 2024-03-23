@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic List Rendering</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Your ItemList component code will go here
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      function Gallery({ children }) {
+        return (
+          <div>
+            <img src={children} alt="img" />
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(6,1fr)",
+              gridTemplateRows: "auto",
+              margin: "auto",
+              width:"100%",
+              gap: "4%",
+              rowGap:"10%"
+            }}
+          >
+            <Gallery children="https://picsum.photos/200" />   
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+            <Gallery children="https://picsum.photos/200" />
+          </div>
+        );
+      }
+
+      // The layout is grid because it is aesthetically pleasing to look. 
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
