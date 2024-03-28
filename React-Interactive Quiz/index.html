@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    function App() {
+      const [quiz, setQuiz] = React.useState([
+        {
+          question: "Which is the longest west flowing river in India?",
+          options: ["Ganga", "Cauvery", "Narmada", "Krishna"],
+          answer: "Narmada",
+          selected: null,
+        },
+        {
+          question: "Which is the largest ocean in thw world?",
+          options: ["Pacific", "Atlantic", "Indian", "Arctic"],
+          answer: "Pacific",
+          selected: null,
+        },
+        {
+          question: "How many moons does Jupiter have?",
+          options: ["83", "92", "78", "95"],
+          answer: "95",
+          selected: null,
+        },
+        {
+          question: "which state has second largest tiger population in india?",
+          options: ["Madhya Pradesh", "Karnataka", "Maharashtra", "Tripura"],
+          answer: "Karnataka",
+          selected: null,
+        },
+      ]);
+
+      const [score, setScore] = React.useState(0);
+      const [quizEnd, setQuizEnd] = React.useState(false);
+
+      // updating the state of the quiz with answer
+      function handleChange(index, optionIndex) {
+        let updatedQuiz = [...quiz];
+        updatedQuiz[index].selected = updatedQuiz[index].options[optionIndex];
+        setQuiz(updatedQuiz);
+      }
+
+      // submitting and getting the total score
+      function handleSubmit() {
+        let totalScore = 0;
+        quiz.forEach((question) => {
+          if (question.selected === question.answer) {
+            totalScore++;
+          }
+        });
+        setScore(totalScore);
+        setQuizEnd(true);
+      }
+
+      // reset the answer to null and restart the quiz
+      function restartQuiz() {
+        setQuizEnd(false);
+        setScore(0);
+        const resetQuiz = quiz.map((question) => {
+          return { ...question, selected: null };
+        });
+        setQuiz(resetQuiz);
+      }
+
+      // to show the score after the quiz ends
+      if (quizEnd) {
+        return (
+          <div>
+            <h2>Your Score : {score}</h2>
+            <button onClick={restartQuiz}>Restart Quiz</button>
+          </div>
+        );
+      }
+
+      return (
+        <div>
+          <h1>Quiz</h1>
+          {quiz.map((question, index) => (
+            <div key={index}>
+              <h3>{question.question}</h3>
+              <ul style={{ listStyleType: "none" }}>
+                {question.options.map((option, optionIndex) => (
+                  <li key={optionIndex}>
+                    <input
+                      type="radio"
+                      name={`question${index}`}
+                      value={option}
+                      checked={question.selected === option}
+                      onChange={() => {
+                        handleChange(index, optionIndex);
+                      }}
+                    />
+                    {option}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+      );
+    }
+
+    root.render(<App />);
+  </script>
+</html>
