@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    function Colour({ setColor, setIsValid }) {
+      // check the input
+      const handleChange = (event) => {
+        const inputValue = event.target.value;
+        const hexColorValue = /^#?([0-9A-F]{3}){1,2}$/i;
+
+        // if valid then set the background color else show error
+        if (hexColorValue.test(inputValue)) {
+          setColor(inputValue);
+          setIsValid(true);
+        } else {
+          setColor("");
+          setIsValid(false);
+        }
+      };
+
+      return (
+        <div
+          style={{
+            width: "100%",
+            marginLeft: "40%",
+            marginTop: "2%",
+          }}
+        >
+          <label for="color">Enter Colour:</label>
+          <input type="text" onChange={handleChange} />
+        </div>
+      );
+    }
+
+    function App() {
+      const [color, setColor] = React.useState(""); // to set the color with input from input tag
+      const [isValid, setIsValid] = React.useState(true); // to check if the input is valid and throw error if not
+      return (
+        <div>
+          <Colour setColor={setColor} setIsValid={setIsValid} />
+          <div
+            style={{
+              backgroundColor: color,
+              border: "2px solid black",
+              height: "400px",
+              width: "400px",
+              margin: "auto",
+              marginTop: "3%",
+            }}
+          ></div>
+          <div>
+            {!isValid && (
+              <p style={{ color: "red", marginLeft: "45%" }}>
+                Invalid HEX color code
+              </p>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    root.render(<App />);
+  </script>
+</html>
