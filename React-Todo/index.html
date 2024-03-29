@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    function App() {
+      const [tasks, setTasks] = React.useState([]);
+      const [taskName, setTaskName] = React.useState("");
+      const [filter, setFilter] = React.useState("All");
+
+      //adding the task
+      const addTask = () => {
+        if (taskName.trim() !== "") {
+          setTasks([...tasks, { name: taskName, completed: false }]);
+          setTaskName("");
+        }
+      };
+
+      //to change the status as to completed or not completed
+      const toggleCompleted = (index) => {
+        let updatedTasks = [...tasks];
+        updatedTasks[index].completed = !updatedTasks[index].completed;
+        setTasks(updatedTasks);
+      };
+
+      //to remove the task from dom
+      const remove = (index) => {
+        let updatedTasks = [...tasks];
+        updatedTasks.splice(index, 1);
+        setTasks(updatedTasks);
+      };
+
+      //filter the task based on status
+      const filterTasks = (status) => {
+        setFilter(status);
+      };
+      // using filter HOF to filter and then using the filtered array to display in dom
+      const filteredTasks = tasks.filter((task) => {
+        if (filter === "All") {
+          return true;
+        } else if (filter === "Active") {
+          return !task.completed;
+        } else if (filter === "Completed") {
+          return task.completed;
+        }
+        return true;
+      });
+
+      return (
+        <div style={{ fontFamily: "Arial, sans-serif" }}>
+          <h2>Todo List</h2>
+          <div style={{ marginBottom: "10px" }}>
+            <input
+              type="text"
+              placeholder="Add new task"
+              value={taskName}
+              onChange={(e) => setTaskName(e.target.value)}
+              style={{ marginRight: "10px", padding: "5px" }}
+            />
+            <button onClick={addTask} style={{ padding: "5px 10px" }}>
+              Add
+            </button>
+          </div>
+          <ul style={{ listStyleType: "none", padding: 0 }}>
+            {filteredTasks.map((task, index) => (
+              <li key={index} style={{ marginBottom: "5px" }}>
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => toggleCompleted(index)}
+                  style={{ marginRight: "5px" }}
+                />
+                <span
+                  style={{
+                    textDecoration: task.completed ? "line-through" : "none",
+                  }}
+                >
+                  {task.name}
+                </span>
+                <button
+                  onClick={() => removeTask(index)}
+                  style={{ marginLeft: "10px", padding: "3px 5px" }}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div>
+            <button
+              onClick={() => filterTasks("All")}
+              style={{ marginRight: "5px", padding: "3px 10px" }}
+            >
+              All
+            </button>
+            <button
+              onClick={() => filterTasks("Active")}
+              style={{ marginRight: "5px", padding: "3px 10px" }}
+            >
+              Active
+            </button>
+            <button
+              onClick={() => filterTasks("Completed")}
+              style={{ padding: "3px 10px" }}
+            >
+              Completed
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    root.render(<App />);
+  </script>
+</html>
