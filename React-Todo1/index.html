@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      #root {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      input[type="text"] {
+        width: 60%;
+        padding: 10px;
+        margin-bottom: 10px;
+        margin-left: 13%;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      ul {
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        list-style-type: none;
+        margin-bottom: 10px;
+      }
+
+      li input[type="checkbox"] {
+        margin-right: 10px;
+        margin-left: 13%;
+      }
+
+      li button {
+        padding: 5px 10px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    function App() {
+      const [todo, setTodo] = React.useState([]);
+      const [task, setTask] = React.useState("");
+
+      function handleChange(index) {
+        let updatedTodo = [...todo];
+        updatedTodo[index].completed = !updatedTodo[index].completed;
+        setTodo(updatedTodo);
+      }
+
+      function handleClick() {
+        if (task != "") {
+          setTodo([...todo, { todo: task, completed: false }]);
+          setTask("");
+        }
+      }
+
+      function removeTask(index) {
+        let updatedTodo = [...todo];
+        updatedTodo.splice(index, 1);
+        setTodo(updatedTodo);
+      }
+
+      return (
+        <div>
+          <h1>Todo</h1>
+          <div>
+            <input
+              type="text"
+              value={task}
+              onInput={(e) => setTask(e.target.value)}
+            />
+            <button onClick={handleClick}>Add Todo</button>
+          </div>
+          <div>
+            {todo.map((e, index) => (
+              <ul style={{ listStyleType: "none" }}>
+                <li key={index}>
+                  <input
+                    type="checkbox"
+                    checked={e.completed}
+                    onChange={() => handleChange(index)}
+                  />
+                  <span
+                    style={{
+                      textDecoration: e.completed ? "line-through" : "none",
+                    }}
+                  >
+                    {e.todo}
+                  </span>
+                  <button onClick={() => removeTask(index)}>Remove</button>
+                </li>
+              </ul>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    root.render(<App />);
+  </script>
+</html>
