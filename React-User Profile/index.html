@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+        }
+    
+        #root {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+    
+        #search input[type="text"] {
+          width: 100%;
+          padding: 10px;
+          font-size: 16px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          margin-bottom: 20px;
+        }
+    
+        #container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          text-align: center;
+        }
+    
+        .card {
+          background-color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          margin: 10px;
+          overflow: hidden;
+          transition: transform 0.3s ease;
+        }
+    
+        .card img {
+          width: 100%;
+          height: auto;
+          border-bottom: 1px solid #ddd;
+        }
+    
+        .card-content {
+          padding: 20px;
+        }
+    
+        .card h3 {
+          margin: 0;
+          font-size: 18px;
+          color: #333;
+        }
+      </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    const UserProfile = ({ user }) => {
+        return (
+          <div className="card">
+            <img src={user.avatar} alt="avatar" />
+            <h3>
+              {user.first_name} {user.last_name}
+            </h3>
+          </div>
+        );
+    };
+
+    const App = () => {
+      let [search, setSearch] = React.useState("");
+      let [users, setUsers] = React.useState([
+        {
+          id: 1,
+          email: "george.bluth@reqres.in",
+          first_name: "George",
+          last_name: "Bluth",
+          avatar: "https://reqres.in/img/faces/1-image.jpg",
+        },
+        {
+          id: 2,
+          email: "janet.weaver@reqres.in",
+          first_name: "Janet",
+          last_name: "Weaver",
+          avatar: "https://reqres.in/img/faces/2-image.jpg",
+        },
+        {
+          id: 3,
+          email: "emma.wong@reqres.in",
+          first_name: "Emma",
+          last_name: "Wong",
+          avatar: "https://reqres.in/img/faces/3-image.jpg",
+        },
+        {
+          id: 4,
+          email: "eve.holt@reqres.in",
+          first_name: "Eve",
+          last_name: "Holt",
+          avatar: "https://reqres.in/img/faces/4-image.jpg",
+        },
+        {
+          id: 5,
+          email: "charles.morris@reqres.in",
+          first_name: "Charles",
+          last_name: "Morris",
+          avatar: "https://reqres.in/img/faces/5-image.jpg",
+        },
+        {
+          id: 6,
+          email: "tracey.ramos@reqres.in",
+          first_name: "Tracey",
+          last_name: "Ramos",
+          avatar: "https://reqres.in/img/faces/6-image.jpg",
+        },
+      ]);
+
+      const filterUsers = users.filter((user) =>
+        `${user.first_name} ${user.last_name}`
+          .toLocaleLowerCase()
+          .includes(search.toLocaleLowerCase())
+      );
+
+      return (
+        <div>
+          <div id="search">
+            <input
+              type="text"
+              placeholder="Search User"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          <div id="container">
+            {filterUsers.map((user) => (
+              <div>
+                <UserProfile user={user} />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    root.render(<App />);
+  </script>
+</html>
