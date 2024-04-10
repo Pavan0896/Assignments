@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      #root {
+        margin: 20px;
+      }
+
+      .formDiv {
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+          rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        padding: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      input[type="submit"],
+      button {
+        padding: 8px 12px;
+        cursor: pointer;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        margin-right: 10px;
+      }
+      input[type="submit"]:hover,
+      button:hover {
+        background-color: #0056b3;
+      }
+      select {
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 5px;
+      }
+      button {
+        background-color: #dc3545;
+      }
+      button:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    const App = () => {
+      const [task, setTask] = React.useState([]);
+      const [flag, setFlag] = React.useState(false);
+      const [id, setId] = React.useState("");
+      const [assignee, setAssignee] = React.useState([]);
+      const [form, setForm] = React.useState({
+        title: "",
+        status: "Incompleted",
+        isCompleted: false,
+        assignee: "",
+      });
+
+      const handleChange = (event) => {
+        let value = event.target.value;
+        let newForm = {
+          ...form,
+          [event.target.name]: value,
+        };
+        setForm(newForm);
+      };
+
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (form.title && form.assignee != "") {
+          let newTask = { ...form };
+          let data = axios.post("http://localhost:3000/todos", newTask);
+          setForm({
+            title: "",
+            status: "Incompleted",
+            isCompleted: false,
+            assignee: "",
+          });
+        }
+      };
+
+      const getData = async () => {
+        let res = await axios("http://localhost:3000/todos");
+        let data = res.data;
+        setTask(data);
+        
+        const arr = [];
+        for (let i = 0; i < data.length; i++) {
+          if (!arr.includes(data[i].assignee)) arr.push(data[i].assignee);
+        }
+        setAssignee(arr);
+      };
+
+      const handleCkeck = async (index) => {
+        event.target.checked
+          ? await axios.patch(`http://localhost:3000/todos/${index}`, {
+              status: "Completed",
+              isCompleted: true,
+            })
+          : await axios.patch(`http://localhost:3000/todos/${index}`, {
+              status: "Incompleted",
+              isCompleted: false,
+            });
+        getData();
+      };
+
+      const deleteTask = async (index) => {
+        await axios.delete(`http://localhost:3000/todos/${index}`);
+        getData();
+      };
+
+      const handleUpdate = (id) => {
+        setFlag(true);
+        setId(id);
+      };
+
+      const handleUpdateSubmit = async (event) => {
+        event.preventDefault();
+        if (form.title && form.assignee != "") {
+          let newTask = { ...form };
+          let data = axios.put(`http://localhost:3000/todos/${id}`, newTask);
+          setForm({
+            title: "",
+            status: "Incompleted",
+            isCompleted: false,
+            assignee: "",
+          });
+          setFlag(false);
+        }
+      };
+
+      const filterData = async () => {
+        let res = await axios("http://localhost:3000/todos");
+        let data = res.data;
+        let filteredData = data.filter((e) => {
+          return e.isCompleted == false;
+        });
+        setTask(filteredData);
+      };
+
+      const filterAssignee = async (assignee) => {
+        let res = await axios("http://localhost:3000/todos");
+        let data = res.data;
+        if (assignee === "") {
+          getData();
+        }
+        let filteredAssignee = data.filter((e) => {
+          return e.assignee == assignee;
+        });
+        setTask(filteredAssignee);
+      };
+
+      return (
+        <div>
+          <div
+            style={{
+              display: "flex",
+              margin: "2%",
+              gap: "3%",
+            }}
+          >
+            <div className="formDiv">
+              <form
+                onSubmit={(e) =>
+                  flag ? handleUpdateSubmit(e) : handleSubmit(e)
+                }
+              >
+                Title:{" "}
+                <input
+                  type="text"
+                  name="title"
+                  value={form.title}
+                  onChange={handleChange}
+                />
+                <br />
+                Asignee:{" "}
+                <input
+                  type="text"
+                  name="assignee"
+                  value={form.assignee}
+                  onChange={handleChange}
+                />
+                <br />
+                <input
+                  type="submit"
+                  value={flag ? "Update task" : "Add Task"}
+                />
+              </form>
+            </div>
+          </div>
+
+          <button onClick={getData}>Get all tasks</button>
+          <button onClick={filterData}>Show Incomplete tasks</button>
+          <select onChange={(e) => filterAssignee(e.target.value)}>
+            <option value="">Filter by Assignee</option>
+            {assignee.map((e) => (
+              <option value={e.assignee}>{e}</option>
+            ))}
+          </select>
+
+          {task.length > 0 ? (
+            <div>
+              {task.map((e, index) => (
+                <div key={e.id}>
+                  <h3>Task {index + 1}</h3>
+                  <ul>
+                    <li>Title: {e.title}</li>
+
+                    <li>
+                      <input
+                        type="checkbox"
+                        checked={e.isCompleted}
+                        onChange={(event) => handleCkeck(e.id)}
+                      />
+                      <span
+                        style={{
+                          textDecoration: e.isCompleted
+                            ? "line-through"
+                            : "none",
+                        }}
+                      >
+                        Status: {e.status}
+                      </span>
+                    </li>
+                    <li>Asignee: {e.assignee}</li>
+                    <button onClick={() => handleUpdate(e.id)}>
+                      Update Task
+                    </button>
+                    <button onClick={() => deleteTask(e.id)}>
+                      Delete Task
+                    </button>
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p></p>
+          )}
+        </div>
+      );
+    };
+
+    root.render(<App />);
+  </script>
+</html>
