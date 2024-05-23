@@ -1,0 +1,36 @@
+{
+  "todos": [
+    {
+      "ID": 1,
+      "Name": "string",
+      "Rating": 2,
+      "Description": "string",
+      "Genre": "string",
+      "Cast": ["array of strings", "array of strings"]
+    },
+    {
+      "ID": 1,
+      "Name": "string",
+      "Rating": 2,
+      "Description": "string",
+      "Genre": "string",
+      "Cast": ["array of strings", "array of strings"]
+    },
+    {
+      "ID": 1,
+      "Name": "string",
+      "Rating": 2,
+      "Description": "string",
+      "Genre": "string",
+      "Cast": ["array of strings", "array of strings"]
+    },
+    {
+      "ID": 1,
+      "Name": "string",
+      "Rating": 2,
+      "Description": "string",
+      "Genre": "string",
+      "Cast": ["array of strings", "array of strings"]
+    }
+  ]
+}
