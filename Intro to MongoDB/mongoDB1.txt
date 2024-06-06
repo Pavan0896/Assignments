@@ -1,0 +1,79 @@
+1. What is a NoSQL Database, and explain the types of NoSQL database?
+ANS :   NoSQL databases are non-tabular databases and store data differently than relational tables. 
+        NoSQL databases come in a variety of types based on their data model. The main types are document, key-value, wide-column, and graph.
+
+
+
+2. What is the difference between SQL and NoSQL databases?
+ANS :                SQL                                                        ||                      NoSQL 
+      . Data is presnet in table format                                                 . Data is present in non-tabluar format example: key-value pair, graph etc
+      . There is a relation between each data with the column of the table              . There may or may not be reation from one data to another
+      . Is structured and not flexible                                                  . Is not structured and flexible
+
+
+
+3. How to choose between MongoDB and MySQL based on your requirements?
+ANS : If the requirement is to store unstructured data, then it is best to choose MongoDB as it stores data easily. 
+      If the requirement is to store structured data for analysis and query, it is best to choose MySQL. 
+
+
+
+4. What are collections and documents in a MongoDB database?
+ANS : Collections : In the hierarchy of MongoDB, collections are the group of documents. Documents in a collection can have different fields. Documents in a collection have a similar or related purpose.
+      Documents : Documents is the basic unit of MongoDB. It stores the data in BSON documents. 
+      Example: In Movies database, Genres can be considered as colelctions, like horror genre is a colelction, fiction genre is a collection.
+                Similarly, in horror genre, each movie in that genre can be called a document. Like movie Conjuring in horror genre is a document. 
+
+
+
+5. What is BSON? What is the difference between BSON and JSON?
+ANS : BSON is a binary-encoded serialization format that is compact and efficient for storing data or transmitting over a network.
+                        BSON                              ||                   JSON
+        . Binary encoded format                                           . Text encoded format
+        . Supports additional data types such as                          . Supports strings, numbers, null, arrays, and objects
+          binary data and date types
+        . Only supported by MongoDB                                       . Can be used with a wide range of databases and programming languages
+
+
+
+6. What are MongoDB Compass and MongoDB Shell used for?
+ANS : Mongo Compass is a GUI for querying, aggregating, and analyzing MongoDB data in a visual environment.
+      MongoDB Shell is an interactive JavaScript interface to MongoDB. You can use the mongo shell to query and update data as well as perform administrative operations.
+
+
+
+7. How to create collections in MongoDB?
+ANS : Creating collections can be done using queries in MongoDB. 
+      db.createCollection("any_name")   --> this query will create a collection name called 'any_name'
+
+
+
+8. What is the difference between insertMany and insertOne?
+ANS : insertOne can be used to insert one document at a time. Example: db.collectionName.insertOne({name:"Person1"})
+      insertMany is used when we need to insert many documents at a time. Example: db.collectionName.insertMany([{name:"Person1"},{name:"Person2"},{name:"Person3"}]).
+      Here array is used for inserting more than 1 document.
+
+
+
+9. What is the difference between deleteOne and deleteMany?
+ANS : deleteOne will delete first matching document in a collection. 
+      deleteMany will delete all matching documents in a collection. 
+
+
+
+10. How to read data in MongoDB? What is the difference between find and findOne?
+ANS : Read data in MongoDB by using query --> db.collectionName.find() 
+      This will give all the documents present in the collectionName. 
+      'find' will return all the documents while 'findOne' will return only one document even if there are many documents. 
+
+
+
+11. What is $set in MongoDB?
+ANS : $set is used when we need to update new field-value pair or replace the value of the field in the document.   
+
+
+
+12. How to filter data using MongoDB?
+ANS : Filter can be done in MongoDB using query --> db.collectionName.find({filter}) 
+      Here is 'filter', we can give the field-value to filter the document in the collection. 
+      example: db.collectionName.find({name: "Person1"}) --> returns the document in which Person1 value is present. 
